@@ -2,7 +2,7 @@ import logo from '../assets/logo.svg';
 import Header from '../components/Header';
 import '../styles/App.css';
 
-export default function IndexPage() {
+export default function AboutPage() {
   return (
     <div className="App">
       <Header />
