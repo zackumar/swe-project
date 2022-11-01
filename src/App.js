@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import IndexPage from './routes';
-import AboutPage from './routes';
+import UnisexPage from './routes/unisex';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Helmet } from 'react-helmet';
@@ -12,8 +12,8 @@ const router = createBrowserRouter([
     element: <IndexPage />,
   },
   {
-    path: '/about',
-    element: <AboutPage />,
+    path: '/unisex',
+    element: <UnisexPage />,
   },
 ]);
 
