@@ -1,14 +1,25 @@
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {
+  Navbar,
+  Nav,
+  Container,
+  Form,
+  Button,
+  Row,
+  Col,
+} from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
+import { MainNav } from '../constants/navigation';
 
 export default function Header() {
+  const { pathname } = useLocation();
+
   return (
-    <Navbar className="App-header" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">
+    <Navbar className="App-header" expand="lg" variant="light">
+      <Container className="d-flex flex-row justify-content-start">
+        <Navbar.Brand as={Link} to="/" style={{ color: 'white' }}>
           <svg
-            width="48"
-            height="48"
+            width="64"
+            height="64"
             viewBox="0 0 164 157"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -34,17 +45,86 @@ export default function Header() {
               />
             </defs>
           </svg>
-          Lorem, ipsum.
         </Navbar.Brand>
-        <Nav className="me-auto nav">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/about">Women</Nav.Link>
-          <Nav.Link href="/about">Unisex</Nav.Link>
-          <Nav.Link href="/about">Men</Nav.Link>
-        </Nav>
-        <div className="d-flex">
-          <Link variant="outline-success">Login</Link>
-        </div>
+        <Container className="p-0">
+          <Row className="g-2">
+            <Col md={5}>
+              <Form.Label htmlFor="search" visuallyHidden>
+                Search Tu Pues
+              </Form.Label>
+
+              <Form.Control
+                style={{ width: '100%' }}
+                placeholder="Search Tu Pues"
+                type="text"
+                id="search"
+                muted
+              ></Form.Control>
+            </Col>
+            <Col md={1}>
+              <Button className="w-100" variant="primary">
+                Search
+              </Button>
+            </Col>
+            <Col
+              md={6}
+              className="d-flex flex-row justify-content-end align-items-center"
+              style={{ color: '#EEEEEE' }}
+            >
+              <Link
+                to="/login"
+                style={{
+                  color: 'white',
+                  marginRight: '0.5rem',
+                  textDecoration: 'none',
+                }}
+              >
+                Login
+              </Link>
+              or
+              <Link
+                to="/signup"
+                style={{
+                  color: 'white',
+                  marginLeft: '0.5rem',
+                  textDecoration: 'none',
+                }}
+              >
+                Sign up!
+              </Link>
+            </Col>
+          </Row>
+          <div className="d-flex align-items-center justify-content-between">
+            <Nav>
+              {MainNav.map(({ name, path }) => (
+                <Nav.Link
+                  style={{
+                    color:
+                      pathname === path || pathname === path + '/'
+                        ? 'white'
+                        : '#d1d1d1',
+                  }}
+                  key={name}
+                  as={Link}
+                  to={path}
+                >
+                  {name}
+                </Nav.Link>
+              ))}
+            </Nav>
+            <Link to="/cart">
+              <svg
+                width="32"
+                height="32"
+                fill="#EEEEEE"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
+              >
+                <path d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H76.1l60.3 316.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H179.9l-9.1-48h317c14.3 0 26.9-9.5 30.8-23.3l54-192C578.3 52.3 563 32 541.8 32H122l-2.4-12.5C117.4 8.2 107.5 0 96 0H24zM176 512c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm336-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48z" />
+              </svg>
+            </Link>
+          </div>
+        </Container>
       </Container>
     </Navbar>
   );
